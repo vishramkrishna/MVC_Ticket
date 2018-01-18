@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf69becd511c424784fe0341dc63c058" Name="Diagram1">
+        <EntityTypeShape EntityType="TicketModel.request" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TicketModel.type_incident" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TicketModel.type_request" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TicketModel.type_sh" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="TicketModel.FK_type_request_request" ManuallyRouted="false" />
+        <AssociationConnector Association="TicketModel.FK_type_incident_type_request" ManuallyRouted="false" />
+        <AssociationConnector Association="TicketModel.FK_type_sh_type_request" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TicketModel.detail" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="TicketModel.tbl_user" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="TicketModel.tbl_category" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="TicketModel.tbl_location" Width="1.5" PointX="7.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

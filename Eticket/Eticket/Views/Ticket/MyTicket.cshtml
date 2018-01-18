@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "MyTicket";
+}
+
+<h2>Ticket</h2>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-animate.js"></script>
+<script src="~/Scripts/angular-touch.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-2.5.0.min.js"></script>
+<script src="~/Scripts/Controller/MyticketController.js">
+</script>
+
+
+<script src="~/Scripts/Factory/Myticketfactory.js">
+</script>
+<script src="~/Scripts/dirPagination.js">
+</script>
+
+
+
+<div ng-app="myApp">
+    <div ng-controller="myticket">
+        <form class="form-horizontal" name="frmApplication">
+            <div class="row col-md-12">
+                <div class="col-md-6">
+                    <h1>MyTickets</h1>
+                    <p>Search:</p><input type="text" ng-model="search" class="form-control" placeholder="search">
+                    <br/>
+                    <table border="1">
+                        <thead>
+                            <tr>
+
+                                <th>ID</th>
+                                <th>TeamViewer Name</th>
+                                <th>TeamViewer Password</th>
+                                <th>Extension Number</th>
+                                <th>Request</th>
+                                <th>Request Type</th>
+                                <th>Message</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="x in details.details|filter:search">
+                            <td>
+                                <span>{{x.id}}</span>
+                            </td>
+                            <td>
+                                <span>{{x.name}}</span>
+                            </td>
+                            <td>
+
+                                <span>{{x.password}}</span>
+                            </td>
+                            <td><span>{{x.extno}}</span></td>
+                            <td>
+
+                                <span> {{getRequest(x.Request)}}</span>
+
+                            </td>
+                            <td><span>{{gettype_request(x.type_request)}}</span></td>
+                            <td><span>{{x.type_sh}}</span></td>
+                        </tr>
+                        
+
+
+                    </table>
+                    @*ng-change="pageChanged()"*@
+                    <ul uib-pagination total-items="details.PageCount" ng-model="details.CurrentPageIndex" ng-change="pageChanged()"></ul>
+                    @*<div uib-alert template-url="alert.html" style="background-color:#fa39c3;color:white">A happy alert!</div>*@
+                    </div>
+
+                </div>
+</form>
+</div>
+</div>

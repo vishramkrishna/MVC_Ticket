@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TicketModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar(max)" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="extno" Type="int" Nullable="false" />
+          <Property Name="Request" Type="int" Nullable="false" />
+          <Property Name="type_request" Type="int" />
+          <Property Name="type_sh" Type="int" />
+        </EntityType>
+        <EntityType Name="request">
+          <Key>
+            <PropertyRef Name="rid" />
+          </Key>
+          <Property Name="rid" Type="int" Nullable="false" />
+          <Property Name="rname" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Ticket.dbo.tbl_category' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_category">
+          <Key>
+            <PropertyRef Name="category_id" />
+            <PropertyRef Name="category_name" />
+          </Key>
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Ticket.dbo.tbl_location' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_location">
+          <Key>
+            <PropertyRef Name="location_id" />
+            <PropertyRef Name="location_name" />
+          </Key>
+          <Property Name="location_id" Type="int" Nullable="false" />
+          <Property Name="location_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="location" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="type_incident">
+          <Key>
+            <PropertyRef Name="incid" />
+          </Key>
+          <Property Name="incid" Type="int" Nullable="false" />
+          <Property Name="tid" Type="int" Nullable="false" />
+          <Property Name="incname" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="type_request">
+          <Key>
+            <PropertyRef Name="tid" />
+          </Key>
+          <Property Name="tid" Type="int" Nullable="false" />
+          <Property Name="rid" Type="int" Nullable="false" />
+          <Property Name="tname" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="type_sh">
+          <Key>
+            <PropertyRef Name="shid" />
+          </Key>
+          <Property Name="shid" Type="int" Nullable="false" />
+          <Property Name="tid" Type="int" Nullable="false" />
+          <Property Name="shname" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_type_incident_type_request">
+          <End Role="type_request" Type="Self.type_request" Multiplicity="1" />
+          <End Role="type_incident" Type="Self.type_incident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_request">
+              <PropertyRef Name="tid" />
+            </Principal>
+            <Dependent Role="type_incident">
+              <PropertyRef Name="tid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_type_request_request">
+          <End Role="request" Type="Self.request" Multiplicity="1" />
+          <End Role="type_request" Type="Self.type_request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="request">
+              <PropertyRef Name="rid" />
+            </Principal>
+            <Dependent Role="type_request">
+              <PropertyRef Name="rid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_type_sh_type_request">
+          <End Role="type_request" Type="Self.type_request" Multiplicity="1" />
+          <End Role="type_sh" Type="Self.type_sh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_request">
+              <PropertyRef Name="tid" />
+            </Principal>
+            <Dependent Role="type_sh">
+              <PropertyRef Name="tid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TicketModelStoreContainer">
+          <EntitySet Name="detail" EntityType="Self.detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="request" EntityType="Self.request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_user" EntityType="Self.tbl_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="type_incident" EntityType="Self.type_incident" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="type_request" EntityType="Self.type_request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="type_sh" EntityType="Self.type_sh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_category" EntityType="Self.tbl_category" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_category].[category_id] AS [category_id], 
+    [tbl_category].[category_name] AS [category_name]
+    FROM [dbo].[tbl_category] AS [tbl_category]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tbl_location" EntityType="Self.tbl_location" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_location].[location_id] AS [location_id], 
+    [tbl_location].[location_name] AS [location_name]
+    FROM [dbo].[tbl_location] AS [tbl_location]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_type_incident_type_request" Association="Self.FK_type_incident_type_request">
+            <End Role="type_request" EntitySet="type_request" />
+            <End Role="type_incident" EntitySet="type_incident" />
+          </AssociationSet>
+          <AssociationSet Name="FK_type_request_request" Association="Self.FK_type_request_request">
+            <End Role="request" EntitySet="request" />
+            <End Role="type_request" EntitySet="type_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_type_sh_type_request" Association="Self.FK_type_sh_type_request">
+            <End Role="type_request" EntitySet="type_request" />
+            <End Role="type_sh" EntitySet="type_sh" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TicketModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="request">
+          <Key>
+            <PropertyRef Name="rid" />
+          </Key>
+          <Property Name="rid" Type="Int32" Nullable="false" />
+          <Property Name="rname" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="type_request" Relationship="Self.FK_type_request_request" FromRole="request" ToRole="type_request" />
+        </EntityType>
+        <EntityType Name="type_incident">
+          <Key>
+            <PropertyRef Name="incid" />
+          </Key>
+          <Property Name="incid" Type="Int32" Nullable="false" />
+          <Property Name="tid" Type="Int32" Nullable="false" />
+          <Property Name="incname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="type_request" Relationship="Self.FK_type_incident_type_request" FromRole="type_incident" ToRole="type_request" />
+        </EntityType>
+        <EntityType Name="type_request">
+          <Key>
+            <PropertyRef Name="tid" />
+          </Key>
+          <Property Name="tid" Type="Int32" Nullable="false" />
+          <Property Name="rid" Type="Int32" Nullable="false" />
+          <Property Name="tname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="request" Relationship="Self.FK_type_request_request" FromRole="type_request" ToRole="request" />
+          <NavigationProperty Name="type_incident" Relationship="Self.FK_type_incident_type_request" FromRole="type_request" ToRole="type_incident" />
+          <NavigationProperty Name="type_sh" Relationship="Self.FK_type_sh_type_request" FromRole="type_request" ToRole="type_sh" />
+        </EntityType>
+        <EntityType Name="type_sh">
+          <Key>
+            <PropertyRef Name="shid" />
+          </Key>
+          <Property Name="shid" Type="Int32" Nullable="false" />
+          <Property Name="tid" Type="Int32" Nullable="false" />
+          <Property Name="shname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="type_request" Relationship="Self.FK_type_sh_type_request" FromRole="type_sh" ToRole="type_request" />
+        </EntityType>
+        <Association Name="FK_type_request_request">
+          <End Role="request" Type="Self.request" Multiplicity="1" />
+          <End Role="type_request" Type="Self.type_request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="request">
+              <PropertyRef Name="rid" />
+            </Principal>
+            <Dependent Role="type_request">
+              <PropertyRef Name="rid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_type_incident_type_request">
+          <End Role="type_request" Type="Self.type_request" Multiplicity="1" />
+          <End Role="type_incident" Type="Self.type_incident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_request">
+              <PropertyRef Name="tid" />
+            </Principal>
+            <Dependent Role="type_incident">
+              <PropertyRef Name="tid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_type_sh_type_request">
+          <End Role="type_request" Type="Self.type_request" Multiplicity="1" />
+          <End Role="type_sh" Type="Self.type_sh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_request">
+              <PropertyRef Name="tid" />
+            </Principal>
+            <Dependent Role="type_sh">
+              <PropertyRef Name="tid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TicketEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="requests" EntityType="Self.request" />
+          <EntitySet Name="type_incident" EntityType="Self.type_incident" />
+          <EntitySet Name="type_request" EntityType="Self.type_request" />
+          <EntitySet Name="type_sh" EntityType="Self.type_sh" />
+          <AssociationSet Name="FK_type_request_request" Association="Self.FK_type_request_request">
+            <End Role="request" EntitySet="requests" />
+            <End Role="type_request" EntitySet="type_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_type_incident_type_request" Association="Self.FK_type_incident_type_request">
+            <End Role="type_request" EntitySet="type_request" />
+            <End Role="type_incident" EntitySet="type_incident" />
+          </AssociationSet>
+          <AssociationSet Name="FK_type_sh_type_request" Association="Self.FK_type_sh_type_request">
+            <End Role="type_request" EntitySet="type_request" />
+            <End Role="type_sh" EntitySet="type_sh" />
+          </AssociationSet>
+          <EntitySet Name="details" EntityType="TicketModel.detail" />
+          <EntitySet Name="tbl_user" EntityType="TicketModel.tbl_user" />
+          <EntitySet Name="tbl_category" EntityType="TicketModel.tbl_category" />
+          <EntitySet Name="tbl_location" EntityType="TicketModel.tbl_location" />
+        </EntityContainer>
+        <EntityType Name="detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extno" Type="Int32" Nullable="false" />
+          <Property Name="Request" Type="Int32" Nullable="false" />
+          <Property Name="type_request" Type="Int32" />
+          <Property Name="type_sh" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_category">
+          <Key>
+            <PropertyRef Name="category_id" />
+            <PropertyRef Name="category_name" />
+          </Key>
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="category_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_location">
+          <Key>
+            <PropertyRef Name="location_id" />
+            <PropertyRef Name="location_name" />
+          </Key>
+          <Property Name="location_id" Type="Int32" Nullable="false" />
+          <Property Name="location_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TicketModelStoreContainer" CdmEntityContainer="TicketEntities">
+          <EntitySetMapping Name="requests">
+            <EntityTypeMapping TypeName="TicketModel.request">
+              <MappingFragment StoreEntitySet="request">
+                <ScalarProperty Name="rid" ColumnName="rid" />
+                <ScalarProperty Name="rname" ColumnName="rname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="type_incident">
+            <EntityTypeMapping TypeName="TicketModel.type_incident">
+              <MappingFragment StoreEntitySet="type_incident">
+                <ScalarProperty Name="incid" ColumnName="incid" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
+                <ScalarProperty Name="incname" ColumnName="incname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="type_request">
+            <EntityTypeMapping TypeName="TicketModel.type_request">
+              <MappingFragment StoreEntitySet="type_request">
+                <ScalarProperty Name="tid" ColumnName="tid" />
+                <ScalarProperty Name="rid" ColumnName="rid" />
+                <ScalarProperty Name="tname" ColumnName="tname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="type_sh">
+            <EntityTypeMapping TypeName="TicketModel.type_sh">
+              <MappingFragment StoreEntitySet="type_sh">
+                <ScalarProperty Name="shid" ColumnName="shid" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
+                <ScalarProperty Name="shname" ColumnName="shname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="details">
+            <EntityTypeMapping TypeName="TicketModel.detail">
+              <MappingFragment StoreEntitySet="detail">
+                <ScalarProperty Name="type_sh" ColumnName="type_sh" />
+                <ScalarProperty Name="type_request" ColumnName="type_request" />
+                <ScalarProperty Name="Request" ColumnName="Request" />
+                <ScalarProperty Name="extno" ColumnName="extno" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_user">
+            <EntityTypeMapping TypeName="TicketModel.tbl_user">
+              <MappingFragment StoreEntitySet="tbl_user">
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_category">
+            <EntityTypeMapping TypeName="TicketModel.tbl_category">
+              <MappingFragment StoreEntitySet="tbl_category">
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_location">
+            <EntityTypeMapping TypeName="TicketModel.tbl_location">
+              <MappingFragment StoreEntitySet="tbl_location">
+                <ScalarProperty Name="location_name" ColumnName="location_name" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

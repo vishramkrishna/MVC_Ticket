@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Ticket";
+}
+
+<h2 >Ticket</h2>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/Controller/TicketController.js">
+</script>
+<script src="~/Scripts/Factory/Ticketfactory.js">
+</script>
+
+<div ng-app="myApp">
+    <div ng-controller="Ticket" >
+        <form class="form-horizontal" name="frmApplication">
+            <div class="row col-md-12">
+                <div class="form-horizontal" role="form">
+
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-8">
+                            <button type="submit" id="b1" class="btn btn-primary" ng-click="myticket()">
+                                MyTicket
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="TUsername" class="col-sm-4 control-label">Team Viewer Username:</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="firstName" id="firstName" class="form-control" data-ng-model="data.name" placeholder="Enter TeamViwer Name" required />
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="TPassword" class="col-sm-4 control-label">Team Viewer Password</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="password" id="password" class="form-control" data-ng-model="data.password" placeholder="Enter TeamViwer Password" required />
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="TPassword" class="col-sm-4 control-label">Extension Number</label>
+                        <div class="col-sm-8">
+
+                            <input id="extension" name="extension" placeholder="Extension NO" maxlength="3" data-ng-model="data.extno" type="tel" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-4 control-label">Email</label>
+                        <div class="col-sm-8">
+
+                            <input id="Email" name="Email" placeholder="Email" data-ng-model="data.email" type="Email" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Request" class="col-sm-4 control-label">TYPE : </label>
+                        <div class="col-md-8">
+
+                            <select name="Request" id="Request" class="form-control" data-ng-model="data.Request"
+                                    data-ng-options="r.rid as r.rname for r in requestoption"
+                                    data-ng-change="gettype_request()">
+                                <option value="">--Select </option>
+                            </select><br />
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" >
+
+                        <label for="type_request" id="type_request" class="col-sm-4 control-label">
+
+                            <span ng-hide="data.Request > 0"> Request_Type:</span>
+                            <span> {{getRequestType()}}</span>
+                        </label>
+
+                        <div class="col-md-8">
+
+                            <select name="type_request" id="type_request" class="form-control" data-ng-model="data.type_request"
+                                    data-ng-options="tr.tid as tr.tname for tr in type_requestoption"
+                                    data-ng-change="type_sh()">
+                                <option value="">--Select </option>
+                            </select><br />
+                        </div>
+                    </div>
+                    <div class="form-group" ng-hide="data.Request > 1">
+                        <label for="type_sh" id="type_sh" class="col-sm-4 control-label">
+                            <span ng-hide="data.type_request > 0 ">Request_Type_SH:</span>{{getRequestName()}}
+                        </label>
+                        <div class="col-md-8" >
+
+                            <select name=" type_sh" id="type_sh" class="form-control" data-ng-model="data.type_sh"
+                             data-ng-options="sh.shid as sh.shname for sh in type_shoption">
+
+                            <option value="">--Select </option>
+                            </select><br />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-8">
+                            <button type="submit" class="btn btn-primary" ng-click="submit()">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+       
+    </div>
+

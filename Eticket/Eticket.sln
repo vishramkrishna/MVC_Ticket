@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eticket", "Eticket\Eticket.csproj", "{582F92DD-CEF9-4C38-B518-177EE111E8E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BAL", "BAL\BAL.csproj", "{C57A9797-AA38-4A6B-827C-EFF90A60659E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{5ECC60D2-60CC-4086-863F-252213D8BF6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{BD338793-D7BE-4C7B-8633-46AB77548D75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business Layer", "Business Layer", "{1825396F-45C6-4089-801C-A0AE3B33BB74}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Acess Layer", "Data Acess Layer", "{6CC4AC39-AD7A-4436-8F88-353DC21755D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Entity", "Shared Entity", "{B9E3CF27-593F-4CC2-B353-057B36F31BAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{582F92DD-CEF9-4C38-B518-177EE111E8E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{582F92DD-CEF9-4C38-B518-177EE111E8E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{582F92DD-CEF9-4C38-B518-177EE111E8E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{582F92DD-CEF9-4C38-B518-177EE111E8E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C57A9797-AA38-4A6B-827C-EFF90A60659E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C57A9797-AA38-4A6B-827C-EFF90A60659E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C57A9797-AA38-4A6B-827C-EFF90A60659E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C57A9797-AA38-4A6B-827C-EFF90A60659E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ECC60D2-60CC-4086-863F-252213D8BF6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ECC60D2-60CC-4086-863F-252213D8BF6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ECC60D2-60CC-4086-863F-252213D8BF6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ECC60D2-60CC-4086-863F-252213D8BF6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD338793-D7BE-4C7B-8633-46AB77548D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD338793-D7BE-4C7B-8633-46AB77548D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD338793-D7BE-4C7B-8633-46AB77548D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD338793-D7BE-4C7B-8633-46AB77548D75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C57A9797-AA38-4A6B-827C-EFF90A60659E} = {1825396F-45C6-4089-801C-A0AE3B33BB74}
+		{5ECC60D2-60CC-4086-863F-252213D8BF6C} = {6CC4AC39-AD7A-4436-8F88-353DC21755D8}
+		{BD338793-D7BE-4C7B-8633-46AB77548D75} = {B9E3CF27-593F-4CC2-B353-057B36F31BAF}
+	EndGlobalSection
+EndGlobal
